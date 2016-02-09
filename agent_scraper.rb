@@ -26,19 +26,20 @@ details.each do |item|
   item.each do |key, value|
     value.each do |team|
       if team["new_team"] !~ /[A-Z][a-z]+/
+        #eliminates column title rows from output
         if key == ""
           next
         else
-          # puts "#{key} has not been signed yet"
-          current_team[key] << team["old_team"]
+          # addresses players that have not signed with a team
+          team["old_team"] =~ /[A-Z][a-z]+/ ? current_team[key] << team["old_team"] : current_team[key] << "Unaffiliated"
           current_team[key] << "unsigned" 
         end
       elsif team["old_team"] == team["new_team"]
-        # puts "#{key} has not changed teams and is still with #{team["old_team"]}"
+        # addresses players that re-signed with old team
         current_team[key] << team["old_team"]
         current_team[key] << "old"       
       else
-        # puts "#{key} has changed teams from #{team["old_team"]} to #{team["new_team"]}"
+        # addresses players that signed with a new team
         current_team[key] << team["new_team"]
         current_team[key] << "new"
       end
