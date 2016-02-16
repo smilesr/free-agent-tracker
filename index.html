@@ -13,7 +13,7 @@
     </style>
   </head>
   <body>
-    <h1> THIS IS THE FREE AGENT SITUATION </H1>
+    <h1> THIS IS THE FREE AGENT SITUATION </h1>
     <div>
       <div> <span class="colorBlue">Blue </span> indicates that player has re-signed with old team </div>
       <div> <span class="colorRed"> Red </span> indicates that the player has signed with this new team </div>
@@ -24,7 +24,7 @@
 
   <script>
     $( document ).ready(function() {
-      $.get('sixth_text_file.txt', function(data) {
+      $.get('final.txt', function(data) {
         $.each( JSON.parse(data), function(key,val) {
           $("#team").append("<h2>" + key + "</h2>");
           $.each (val, function (index, value) {

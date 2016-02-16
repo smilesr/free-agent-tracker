@@ -20,7 +20,7 @@ details = rows.collect do |row|
   detail[(row.css('a/text()').to_s)] = detail1
   detail
   end
-end
+
 current_team = Hash.new{|h,k| h[k] = []}
 details.each do |item|
   item.each do |key, value|
@@ -46,3 +46,19 @@ details.each do |item|
     end
   end
 end 
+
+by_team = Hash.new{|h,k| h[k] = []}
+
+current_team.each do |player, team|
+  hsh = {}
+  hsh[player] = team[1]
+  by_team[team[0]] << hsh
+ end
+
+temp_list = by_team.sort_by {|squad, other_info| squad}
+final_list = Hash[*temp_list.flatten(1)]
+
+output = File.open( "./output.txt","w" )
+output << final_list
+output.close
+system "sed 's/=>/:/g' output.txt > final.txt"
