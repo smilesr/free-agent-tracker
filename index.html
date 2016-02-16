@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title> MLB Free Agent Update </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <style>
+      .colorBlue {
+      color: blue;
+      }
+      .colorRed{
+      color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1> THIS IS THE FREE AGENT SITUATION </H1>
+    <div>
+      <div> <span class="colorBlue">Blue </span> indicates that player has re-signed with old team </div>
+      <div> <span class="colorRed"> Red </span> indicates that the player has signed with this new team </div>
+      <div> Black indicates that the player has not been re-signed yet </div>
+      <div id="team"></div>
+      <div id="stuff"></div>
+    </div>
+
+  <script>
+    $( document ).ready(function() {
+      $.get('sixth_text_file.txt', function(data) {
+        $.each( JSON.parse(data), function(key,val) {
+          $("#team").append("<h2>" + key + "</h2>");
+          $.each (val, function (index, value) {
+            $.each (value, function (k, v) {
+              if(v == "old"){
+
+                firstDiv = "<div style='color:blue'>";
+              } else if (v == "new") {
+                firstDiv = "<div style='color:red'>";
+              } else {
+                firstDiv = "<div>";
+              };
+              $("#team").append(firstDiv + k + "</div>");
+            });
+          });
+        });
+      }); 
+     }); 
+   </script> 
+  </body>
+</html>
